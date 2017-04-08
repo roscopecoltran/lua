@@ -52,15 +52,6 @@ string(COMPARE EQUAL "${CMAKE_OSX_SYSROOT}" "iphoneos" is_ios)
 string(COMPARE EQUAL "${CMAKE_SYSTEM_NAME}" "Linux" is_linux)
 string(COMPARE EQUAL "${CMAKE_GENERATOR}" "Xcode" is_xcode)
 
-# See: cmake/Hunter/config.cmake
-# First call to 'hunter_add_package' will contains read of Hunter/config.cmake
-# Next variables will be used:
-#   * is_ios
-#   * is_linux
-hunter_add_package(Sugar)
-include("${SUGAR_ROOT}/cmake/Sugar")
-include(sugar_include)
-
 if(is_xcode)
   option(${PROJECT_NAME}_DISABLE_DSYM "Disable generation of dSYM information" ON)
   if(${PROJECT_NAME}_DISABLE_DSYM)
@@ -69,8 +60,6 @@ if(is_xcode)
   set(CMAKE_CONFIGURATION_TYPES "Debug;Release;MinSizeRel;RelWithDebInfo" CACHE STRING "Configuration types")
   set(CMAKE_XCODE_ATTRIBUTE_ENABLE_BITCODE NO)
 endif()
-
-
 
 ### Library ###
 set(
